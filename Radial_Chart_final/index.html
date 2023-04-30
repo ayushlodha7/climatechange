@@ -11,14 +11,14 @@ svg {
     font-weight: 400;
     fill: #585858;
     text-align: center;
-    background: #ffffff; /*#fcfcfa; #a9a9a9  #090909*/
+    background: #ffffff;
     border: 2px solid;
     border-radius: 35px;
 }
 
 .title {
-    font-size: 20px;  /*28px*/
-    fill: #000000; /*#4F4F4F;*/
+    font-size: 20px;
+    fill: #000000;
     font-weight: 300;
     text-anchor: start;
 }
@@ -42,9 +42,7 @@ svg {
 .axis line {
     fill: none;
     stroke: none;
-    /*shape-rendering: crispEdges;*/
     shape-rendering: geometricPrecision;
-    /*shape-rendering: auto;*/
 }
 
 .axis text {
@@ -55,7 +53,7 @@ svg {
 
 .legendTitle {
     font-size: 14px;
-    fill: #000000;  /*#4F4F4F;*/
+    fill: #000000;
     font-weight: 300;
 }
 
@@ -87,16 +85,12 @@ svg {
 .axisCircles {
     fill: none;
     stroke: #E8E8E8;
-    stroke-width: 1.25px;  /* 1px */
-    /*shape-rendering: geometricPrecision;*/
-    /*shape-rendering: crispEdges;*/
+    stroke-width: 1.25px;
     shape-rendering: auto;
 }
 .line {
     fill: none;
-    /*stroke: red;*/  /*lightgreen;*/
-    stroke-width: 2.3px;  /*1.5px; 1.25px 2.5px 2.75*/
-    /*shape-rendering: crispEdges;*/
+    stroke-width: 2.3px;
     shape-rendering: geometricPrecision;
 }
 .path {
@@ -106,7 +100,7 @@ svg {
 }
 
 .play {
-    font: 500 35px sans-serif;  /* 40px */
+    font: 500 35px sans-serif;
     fill: #00ff15; 
     cursor: pointer;
 }
@@ -115,11 +109,8 @@ svg {
 }
 
 </style>
-
-<!-- D3.js https-->
-<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script> -->
+<!-- Referencing code from the d3.js and the fonts of the Open Sans from the Google-->
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<!-- Google Font http-->
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
 
 </head>
@@ -131,9 +122,7 @@ svg {
 
 <script> 
 
-///////////////////////////////////////////////////////////////////////////
-//////////////////// Set up and initiate svg containers ///////////////////
-/////////////////////////////////////////////////////////////////////////// 
+// Set up and initiate svg containers
 
 var margin = {
     top: 70,
@@ -141,15 +130,14 @@ var margin = {
     bottom: 120,
     left: 20
 };
-// var width = window.innerWidth - margin.left - margin.right - 20;
-// var height = window.innerHeight - margin.top - margin.bottom - 20;
+
 var width = 400 - margin.left - margin.right - 20;
 var height = 550 - margin.top - margin.bottom - 20;
 
-var domLow = -1.5,  //-15, low end of data
-    domHigh = 1.25,  //30, high end of data
-    axisTicks = [-1, 0, 1],   //[-20,-10,0,10,20,30];  [-2,-1,0,1,2,3];  [-1.5,-0.5,0.5,1.5];
-    duration = 25000; //100000, 50000
+var domLow = -1.5, 
+    domHigh = 1.25, 
+    axisTicks = [-1, 0, 1],
+    duration = 25000;
 
 
 //SVG container
@@ -164,11 +152,7 @@ var svg = d3.select("#weatherRadial")
 var parseDate = d3.time.format("%Y-%m-%d").parse;
 
 
-///////////////////////////////////////////////////////////////////////////
-//////////////////////////// Create scales ////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-
-
+//Creating the  scales 
 //Loads data, everything below is within callback: 
 d3.text("data_monthly_ns_avg.tsv", function(text) {
 
@@ -180,9 +164,6 @@ var climateData = d3.csv.parseRows(text, function(d) {
     years.push(temp[0].split('/')[0]);
     return {date: parseDate(temp[0].replace('/', '-') + '-1'), mean_temp: +temp[1]}  //'-') + '-01'
 });
-//var data = d3.csv.parseRows(text);
-//console.log(climateData);
-
 
 //Set the minimum inner radius and max outer radius of the chart
 var outerRadius = Math.min(width, height, 500)/2,
@@ -199,11 +180,6 @@ var distScale = d3.scale.linear()
     .range([innerRadius, outerRadius])
     .domain([domLow, domHigh]); 
 
-//Scale to turn the date into an angle of 360 degrees in total
-//With the first datapoint (Jan 1st) on top
-// var angle = d3.scale.linear()
-//     .range([-180, 180])
-//     .domain(d3.extent(climateData, function(d) { return d.date; }));
 
 //Function to convert date into radians for path function
 //The radial scale in this case starts with 0 at 90 degrees
@@ -213,9 +189,7 @@ var radian = d3.scale.linear()
     .domain(d3.extent(climateData, function(d) { return d.date; }));
 
 
-///////////////////////////////////////////////////////////////////////////
-//////////////////////////// Create Titles ////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+//Create Titles
 
 var textWrapper = svg.append("g").attr("class", "textWrapper")
     .attr("transform", "translate(" + Math.max(-width/2, -outerRadius - 170) + "," + 0 + ")");
@@ -243,9 +217,8 @@ var play = textWrapper.append("text")
 
 
 
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////// Create Axes /////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+
+// Create Axes
 
 //Wrapper for the bars and to position it downward
 var barWrapper = svg.append("g")
@@ -289,15 +262,7 @@ barWrapper.append("text")
     //.attr("dy", "0.9em")
     .text("1850");
 
-///////////////////////////////////////////////////////////////////////////
-//////////////// Create radial gradient for the line //////////////////////
-///////////////////////////////////////////////////////////////////////////
-
-
-//Extra scale since the color scale is interpolated
-// var distScale = d3.scale.linear()
-//     .domain([domLow, domHigh])
-//     .range([innerRadius, outerRadius]);
+//Create radial gradient for the line
 
 //Calculate the variables for the temp gradient
 var numStops = 10;
@@ -320,9 +285,7 @@ var radialGradient = svg.append("defs")
 
 
 
-///////////////////////////////////////////////////////////////////////////
-////////////////////////////// Draw lines /////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+//Draw lines
 
 
 //Radial line, takes radians as argument
@@ -366,9 +329,7 @@ play.on("click", function(){
 });
 
  
-///////////////////////////////////////////////////////////////////////////
-//////////////// Create the gradient for the legend ///////////////////////
-///////////////////////////////////////////////////////////////////////////
+//Create the gradient for the legend
 
 //Extra scale since the color scale is interpolated
 var tempScale = d3.scale.linear()
@@ -382,7 +343,7 @@ tempRange[2] = tempRange[1] - tempRange[0];
 tempPoint = [];
 for(var i = 0; i < numStops; i++) {
     tempPoint.push(i * tempRange[2]/(numStops-1) + tempRange[0]);
-}//for i
+}
 
 //Create the gradient
 svg.append("defs")
@@ -396,9 +357,7 @@ svg.append("defs")
     .attr("offset", function(d,i) { return tempScale( tempPoint[i] )/width; })   
     .attr("stop-color", function(d,i) { return colorScale( tempPoint[i] ); });
 
-///////////////////////////////////////////////////////////////////////////
-////////////////////////// Draw the legend ////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
+//Draw the legend 
 
 var legendWidth = Math.min(outerRadius*2, 400);
 
@@ -443,12 +402,8 @@ legendsvg.append("g")
     .attr("transform", "translate(0," + (10) + ")")
     .call(xAxis);
 
-}); //End data callback
+}); 
 
 </script>
-
-
-
-
 </body>
 </html>
