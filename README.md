@@ -1,4 +1,4 @@
-# Landing Page:climatecs552.github.io
+# Landing Page: https://climatecs552.github.io/
 
 # Climate Change CS552-Term Project
 ## Plot Links:
@@ -23,6 +23,6 @@ https://climatecs552.github.io/Flood_Risk_3DGlobe_final/
 ## Chapter 3: Cause
 Bubble Chart of C02 Emissions: https://climatecs552.github.io/C02_bubble_map_final/
 
-## Teammates:
+## Group Members:
 ### Ayush Lodha
 ### Harishankar Sekhar
