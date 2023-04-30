@@ -67,31 +67,29 @@ select {
   sens = 0.20,
   focused;
  
-  // define the color scale based on temperature values
+  // Defining the color scale based on temperature values
   var colorScale = d3.scale.sqrt()
    .domain([0, 10]) // minimum and maximum temperatures in the data file
-   .range(['white','#008DFF']); 
+   .range(['white','#008DFF']); // white to blue transistion from lighter to darker
 
 
-  //Setting projection
-
+  //Setting up the orthographic projection
   var projection = d3.geo.orthographic()
   .scale(210)
   .rotate([0, 0])
   .translate([width / 2, height / 2])
   .clipAngle(90);
 
+  // Defining the geo path of the above projection
   var path = d3.geo.path()
   .projection(projection);
 
   //SVG container
-
   var svg = d3.select("body").append("svg")
   .attr("width", width)
   .attr("height", height);
 
   //Adding water
-
   svg.append("path")
   .datum({type: "Sphere"})
   .attr("class", "water")
@@ -105,16 +103,18 @@ select {
     svg.selectAll(".focused").classed("focused", focused = false);
   }));
 
+  // This is the countrytooltip which would further help us when we are pointing out at the country
   var countryTooltip = d3.select("body").append("div").attr("class", "countryTooltip"),
   countryList = d3.select("body").append("select").attr("name", "countries");
 
-
+  // we need the world.json which has polygons of the country sizes and 
+  // names.tsv is the file which has names of the country of each of the polygon
   queue()
   .defer(d3.json, "world.json")
   .defer(d3.tsv, "names.tsv")
   .await(ready);
 
-  //Main function
+  //Below is the Main function
 
   function ready(error, world, countryData) {
 
@@ -138,7 +138,7 @@ select {
     .attr("class", "land")
     .attr("d", path)
 
-    //Drag event
+    //Dragging event over the rotation of the globe
 
     .call(d3.behavior.drag()
       .origin(function() { var r = projection.rotate(); return {x: r[0] / sens, y: -r[1] / sens}; })
@@ -216,17 +216,20 @@ select {
     });
 
     // Create the legend
+    // below are the blocks of code which adds the legend to the globe
     var legendWidth = 300;
     var legendHeight = 20;
 
+    // below is the code for the legendSVG which helps us define width and height of the code block
     var legendSvg = d3.select("#legend")
       .append("svg")
-      .attr("width", legendWidth+20)
-      .attr("height", legendHeight +30); // Increase height to accommodate labels and ticks
+      .attr("width", legendWidth+20) // Width
+      .attr("height", legendHeight +30); // Height
 
     var legend = legendSvg.append("g")
       .attr("class", "legend");
 
+    // this is the legend scale where the flood_risk varies from (0,10)
     var legendScale = d3.scale.sqrt()
       .domain([0, 10])
       .range([0, legendWidth-0.8]);
@@ -234,20 +237,24 @@ select {
     var legendGradient = legend.append("defs")
       .append("linearGradient")
       .attr("id", "legendGradient");
-
+      
+    // This is the gradient function of the legend --> start(white)
     legendGradient.append("stop")
       .attr("offset", "0%")
       .attr("stop-color", "white");
 
+    // This is the gradient function of the legend --> end(blue)
     legendGradient.append("stop")
       .attr("offset", "100%")
       .attr("stop-color", "#008DFF");
 
+    // This is the function which will help with the making the legend rectangle
     legend.append("rect")
       .attr("width", legendWidth)
       .attr("height", legendHeight)
       .style("fill", "url(#legendGradient)");
 
+    // Ticks of the legend
     var legendTicks = [0, 2.5, 5, 7.5, 10];
     var legendTickLines = legend.selectAll(".tickLine")
       .data(legendTicks)
@@ -260,13 +267,14 @@ select {
       .style("stroke", "black")
       .style("stroke-width", "0.6px");
 
+    // This the code for the legend labels
     var legendLabels = legend.selectAll("text")
       .data(legendTicks)
       .enter()
       .append("text")
       .text(function(d) { return d; })
       .attr("x", function(d) { return legendScale(d-0.0001); })
-      .attr("y", legendHeight + 15) // Move the labels below the tick lines
+      .attr("y", legendHeight + 15)
       .attr("text-anchor", "right")
       .style("font-size", "10px")
       .style("font-family", "arial");
