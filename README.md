@@ -1,4 +1,4 @@
-# Landing Page: https://climatecs552.github.io/
+# Landing Page: https://ayushlodha7.github.io/climatechange/
 
 # Climate Change CS552-Term Project
 ## Plot Links:
