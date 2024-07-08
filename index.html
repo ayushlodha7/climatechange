@@ -1,42 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Climate Change CS552 -Term Project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Change CS552 - Term Project</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assuming you have a CSS file for styling -->
 </head>
 
 <body>
+    <header>
+        <h1>Climate Change: Unveiling the Truth</h1>
+        <p>Welcome to our journey through the data and stories behind climate change.</p>
+    </header>
 
-  <h1>Climate Change CS552-Term Project</h1>
-  <h2>Plot Links:</h2>
+    <main>
+        <!-- Chapter 1: The Myth -->
+        <section id="myth">
+            <h2>Chapter 1: Is Climate Change a Myth?</h2>
+            <p>Many argue that climate change is just a myth. Let's explore the data to uncover the reality.</p>
 
-  <h3> Chapter 1: Climate Change: A Myth</h3>
-  <p>
-    <a href="https://climatecs552.github.io/Temp_3DGlobe_final/">3D Globe Choropleth Map: Average Temperature of all Countries</a>
-  </p>
-  <p>
-    <a href="https://climatecs552.github.io/Heat_Map_final/">Interactive Heatmap: Monthwise Average Temperature from 1753-2015</a>
-  </p>
-  <p>
-    <a href="https://climatecs552.github.io/Worldmap_Anomalytemp_final/">Spatial Temperature Anamoly Map and Animation</a>
-  </p>
-  <p>
-    <a href="https://climatecs552.github.io/Radial_Chart_final/">Radial Chart of Global Temperature Anamoly</a>
-  </p>
-  <h3> Chapter 2: Consequences</h3>
-  <p>
-    <a href="https://climatecs552.github.io/Flood_Risk_3DGlobe_final/">3D Globe Choropleth Map: Flood Risk of all Countries</a>
-  </p>
-  <p>
-    <a href="https://climatecs552.github.io/Climate_Risk_3DGlobe_final/">3D Globe Choropleth Map: Climate Vulnerability Risk of all Countries</a>
-  </p>
+            <!-- Visualization 1: Temperature Globe -->
+            <div class="visualization">
+                <h3>Global Temperature Changes</h3>
+                <p>View the average temperature of all countries through a 3D globe to see the reality of global warming.</p>
+                <iframe src="https://climatecs552.github.io/Temp_3DGlobe_final/" width="100%" height="500px"></iframe>
+            </div>
 
-  <h3> Chapter 3: Cause</h3>
-  <p>
-    <a href="https://climatecs552.github.io/C02_bubble_map_final/">Bubble Chart of C02 Emissions</a>
-  </p>
-<h3>
-  Group Members: Ayush Manojkumar Lodha and Harishankar Sekhar
-</h3>
+            <!-- Visualization 2: Heat Map -->
+            <div class="visualization">
+                <h3>Historical Temperature Trends</h3>
+                <p>Discover how temperatures have changed from 1753 to 2015 with our interactive heatmap.</p>
+                <iframe src="https://climatecs552.github.io/Heat_Map_final/" width="100%" height="500px"></iframe>
+            </div>
+
+            <!-- Visualization 3: Anomaly Map -->
+            <div class="visualization">
+                <h3>Temperature Anomalies Over Time</h3>
+                <p>Explore the spatial temperature anomaly map and see how deviations from the norm have evolved.</p>
+                <iframe src="https://climatecs552.github.io/Worldmap_Anomalytemp_final/" width="100%" height="500px"></iframe>
+            </div>
+
+            <!-- Visualization 4: Radial Chart -->
+            <div class="visualization">
+                <h3>Radial Chart of Global Temperature Anomaly</h3>
+                <p>Understand the radial depiction of global temperature changes and their impact over time.</p>
+                <iframe src="https://climatecs552.github.io/Radial_Chart_final/" width="100%" height="500px"></iframe>
+            </div>
+        </section>
+
+        <!-- Chapter 2: Consequences -->
+        <section id="consequences">
+            <h2>Chapter 2: The Consequences of Climate Change</h2>
+            <p>As temperatures rise, the consequences become more severe. Here's how it affects our planet.</p>
+            <p>
+                <iframe src="https://climatecs552.github.io/Flood_Risk_3DGlobe_final/" width="100%" height="500px"></iframe>
+                <p>Flood risks are rising with increasing global temperatures. Explore the flood risk for all countries.</p>
+            </p>
+            <p>
+                <iframe src="https://climatecs552.github.io/Climate_Risk_3DGlobe_final/" width="100%" height="500px"></iframe>
+                <p>Climate vulnerability is a major issue, especially for certain regions. See the climate vulnerability risk across countries.</p>
+            </p>
+        </section>
+
+        <!-- Chapter 3: Cause -->
+        <section id="cause">
+            <h2>Chapter 3: What Causes Climate Change?</h2>
+            <p>Understanding the drivers behind climate change is crucial for finding solutions.</p>
+            <div class="visualization">
+                <iframe src="https://climatecs552.github.io/C02_bubble_map_final/" width="100%" height="500px"></iframe>
+                <p>CO2 emissions are a primary contributor to climate change. Explore the bubble chart of CO2 emissions globally.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Group Members: Ayush Lodha and Harishankar Sekhar</p>
+    </footer>
+
 </body>
+
 </html>
